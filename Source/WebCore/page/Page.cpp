@@ -1847,14 +1847,13 @@ void Page::scheduleRenderingUpdateInternal()
     if (!chrome().client().scheduleRenderingUpdate())
         renderingUpdateScheduler().scheduleRenderingUpdate();
 
+    auto interval = preferredRenderingUpdateInterval();
     auto now = MonotonicTime::now();
-    forEachWindowEventLoop([&](WindowEventLoop& windowEventLoop) {
-        auto interval = preferredRenderingUpdateInterval();
-        auto nextRenderingUpdateTime = m_lastRenderingUpdateTimestamp + interval;
-        if (nextRenderingUpdateTime < now)
-            nextRenderingUpdateTime = now + interval;
-        windowEventLoop.didScheduleRenderingUpdate(*this, nextRenderingUpdateTime);
-    });
+    auto nextRenderingUpdateTimestamp = m_lastRenderingUpdateTimestamp + interval;
+    if (now < nextRenderingUpdateTimestamp)
+        m_nextRenderingUpdateTimestamp = nextRenderingUpdateTimestamp;
+    else // FIXME: Provide a better estimate for the next rendering time. For now, we assume uniform distribution.
+        m_nextRenderingUpdateTimestamp = now + interval / 2;
 }
 
 void Page::didScheduleRenderingUpdate()
@@ -1910,10 +1909,7 @@ void Page::updateRendering()
     }
 
     m_lastRenderingUpdateTimestamp = MonotonicTime::now();
-
-    forEachWindowEventLoop([&](WindowEventLoop& eventLoop) {
-        eventLoop.didStartRenderingUpdate(*this);
-    });
+    m_nextRenderingUpdateTimestamp = std::nullopt;
 
     bool isSVGImagePage = chrome().client().isSVGImageChromeClient();
     if (!isSVGImagePage)
@@ -4110,6 +4106,21 @@ void Page::forEachDocument(const Function<void(Document&)>& functor) const
     forEachDocumentFromMainFrame(protectedMainFrame(), functor);
 }
 
+bool Page::findMatchingLocalDocument(const Function<bool(Document&)>& functor) const
+{
+    for (const auto* frame = &mainFrame(); frame; frame = frame->tree().traverseNext()) {
+        auto* localFrame = dynamicDowncast<LocalFrame>(frame);
+        if (!localFrame)
+            continue;
+        RefPtr document = localFrame->document();
+        if (!document)
+            continue;
+        if (functor(*document))
+            return true;
+    }
+    return false;
+}
+
 void Page::forEachRenderableDocument(const Function<void(Document&)>& functor) const
 {
     Vector<Ref<Document>> documents;
@@ -4853,10 +4864,10 @@ void Page::reloadExecutionContextsForOrigin(const ClientOrigin& origin, std::opt
     }
 }
 
-void Page::opportunisticallyRunIdleCallbacks()
+void Page::opportunisticallyRunIdleCallbacks(MonotonicTime deadline)
 {
     forEachWindowEventLoop([&](auto& eventLoop) {
-        eventLoop.opportunisticallyRunIdleCallbacks();
+        eventLoop.opportunisticallyRunIdleCallbacks(deadline);
     });
 }
 

@@ -8462,6 +8462,13 @@ void Document::cancelIdleCallback(int id)
     m_idleCallbackController->removeIdleCallback(id);
 }
 
+bool Document::hasPendingIdleCallback() const
+{
+    if (activeDOMObjectsAreSuspended() || activeDOMObjectsAreStopped())
+        return false;
+    return m_idleCallbackController ? !m_idleCallbackController->isEmpty() : false;
+}
+
 HttpEquivPolicy Document::httpEquivPolicy() const
 {
     if (shouldEnforceContentDispositionAttachmentSandbox())

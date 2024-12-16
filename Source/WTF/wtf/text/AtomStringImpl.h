@@ -83,7 +83,7 @@ private:
 inline RefPtr<AtomStringImpl> AtomStringImpl::lookUp(StringImpl* string)
 {
     if (!string || string->isAtom())
-        return static_cast<AtomStringImpl*>(string);
+        SUPPRESS_MEMORY_UNSAFE_CAST return static_cast<AtomStringImpl*>(string);
     return lookUpSlowCase(*string);
 }
 
@@ -128,7 +128,7 @@ ALWAYS_INLINE Ref<AtomStringImpl> AtomStringImpl::add(StringImpl& string)
 {
     if (string.isAtom()) {
         ASSERT_WITH_MESSAGE(!string.length() || isInAtomStringTable(&string), "The atom string comes from an other thread!");
-        return static_cast<AtomStringImpl&>(string);
+        SUPPRESS_MEMORY_UNSAFE_CAST return static_cast<AtomStringImpl&>(string);
     }
     return addSlowCase(string);
 }
@@ -137,7 +137,7 @@ ALWAYS_INLINE Ref<AtomStringImpl> AtomStringImpl::add(Ref<StringImpl>&& string)
 {
     if (string->isAtom()) {
         ASSERT_WITH_MESSAGE(!string->length() || isInAtomStringTable(string.ptr()), "The atom string comes from an other thread!");
-        return static_reference_cast<AtomStringImpl>(WTFMove(string));
+        SUPPRESS_MEMORY_UNSAFE_CAST return static_reference_cast<AtomStringImpl>(WTFMove(string));
     }
     return addSlowCase(WTFMove(string));
 }
@@ -146,7 +146,7 @@ ALWAYS_INLINE Ref<AtomStringImpl> AtomStringImpl::add(AtomStringTable& stringTab
 {
     if (string.isAtom()) {
         ASSERT_WITH_MESSAGE(!string.length() || isInAtomStringTable(&string), "The atom string comes from an other thread!");
-        return static_cast<AtomStringImpl&>(string);
+        SUPPRESS_MEMORY_UNSAFE_CAST return static_cast<AtomStringImpl&>(string);
     }
     return addSlowCase(stringTable, string);
 }

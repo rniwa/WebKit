@@ -5962,7 +5962,8 @@ TEST(ProcessSwap, TerminatedSuspendedPageProcess)
         done = false;
 
         auto pid2 = [webView2 _webProcessIdentifier];
-        EXPECT_EQ(pid1, pid2);
+        bool processSwapped = pid1 != pid2;
+        EXPECT_EQ(processSwapped, isSiteIsolationEnabled(webView2.get()));
 
         request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"pson://www.google.com/main2.html"]];
         [webView loadRequest:request];

@@ -180,6 +180,12 @@ void WebPage::createMockAccessibilityElement(pid_t pid)
 
 void WebPage::platformReinitializeAccessibilityToken()
 {
+    // The main frame can change during WebPage construction (e.g. committing a provisional frame
+    // with site isolation) before platformInitializeAccessibility has created the mock element.
+    // platformInitializeAccessibility will transfer the token in that case.
+    if (!m_mockAccessibilityElement)
+        return;
+
     RefPtr frame = m_page->focusController().focusedOrMainFrame();
     if (!frame)
         return;

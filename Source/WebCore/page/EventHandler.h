@@ -326,8 +326,8 @@ public:
 #if ENABLE(DRAG_SUPPORT)
     WEBCORE_EXPORT bool eventMayStartDrag(const PlatformMouseEvent&) const;
     
-    WEBCORE_EXPORT void didStartDrag();
-    WEBCORE_EXPORT void dragCancelled();
+    WEBCORE_EXPORT void LEGACY_NODELETE didStartDrag();
+    WEBCORE_EXPORT void LEGACY_NODELETE dragCancelled();
     WEBCORE_EXPORT std::optional<RemoteUserInputEventData> dragSourceEndedAt(const PlatformMouseEvent&, OptionSet<DragOperation>, MayExtendDragSession = MayExtendDragSession::No);
     WEBCORE_EXPORT void dragSourceEnded(const PlatformMouseEvent&, OptionSet<DragOperation>, MayExtendDragSession = MayExtendDragSession::No);
 #endif
@@ -508,7 +508,7 @@ private:
     static bool isKeyboardOptionTab(const FocusEventData&);
     static bool eventInvertsTabsToLinksClientCallResult(const FocusEventData&);
 
-    void clearLastKnownMousePosition();
+    void LEGACY_NODELETE clearLastKnownMousePosition();
 
 #if !ENABLE(IOS_TOUCH_EVENTS)
     void fakeMouseMoveEventTimerFired();
@@ -782,7 +782,7 @@ private:
         ImmediateActionStage immediateActionStage { ImmediateActionStage::None };
     };
 
-    bool isSynthesizedContextMenuPressDuringPendingDrag(const PlatformMouseEvent&) const;
+    bool LEGACY_NODELETE isSynthesizedContextMenuPressDuringPendingDrag(const PlatformMouseEvent&) const;
     std::optional<PendingDragState> pendingDragStateToPreserveAcross(const PlatformMouseEvent&) const;
     void restorePendingDragState(const PendingDragState&);
 

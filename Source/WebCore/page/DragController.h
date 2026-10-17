@@ -114,7 +114,7 @@ public:
     static const float DragImageAlpha;
 
 private:
-    void updateSupportedTypeIdentifiersForDragHandlingMethod(DragHandlingMethod, const DragData&) const;
+    void LEGACY_NODELETE updateSupportedTypeIdentifiersForDragHandlingMethod(DragHandlingMethod, const DragData&) const;
     bool dispatchTextInputEventFor(LocalFrame*, const DragData&);
     bool canProcessDrag(LocalFrame&, const DragData&);
     bool concludeEditDrag(const DragData&);

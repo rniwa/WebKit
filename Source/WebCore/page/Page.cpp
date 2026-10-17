@@ -3550,7 +3550,7 @@ static inline MediaProducerMutedStateFlags toMediaProducerMutedStateFlags(MediaP
     return { };
 }
 
-static inline MediaProducerMutedStateFlags computeCaptureMutedState(MediaProducerMutedStateFlags currentState, bool isActive, MediaProducerMediaCaptureKind kind)
+static inline MediaProducerMutedStateFlags LEGACY_NODELETE computeCaptureMutedState(MediaProducerMutedStateFlags currentState, bool isActive, MediaProducerMediaCaptureKind kind)
 {
     auto flagsToUpdate = toMediaProducerMutedStateFlags(kind);
     return isActive ? (currentState - flagsToUpdate) : (currentState | flagsToUpdate);

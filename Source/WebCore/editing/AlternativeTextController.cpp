@@ -73,12 +73,12 @@ constexpr OptionSet<DocumentMarkerType> LEGACY_NODELETE markerTypesForAppliedDic
 
 #if USE(AUTOCORRECTION_PANEL)
 
-static inline OptionSet<DocumentMarkerType> markerTypesForAutocorrection()
+static inline OptionSet<DocumentMarkerType> LEGACY_NODELETE markerTypesForAutocorrection()
 {
     return { DocumentMarkerType::Autocorrected, DocumentMarkerType::CorrectionIndicator, DocumentMarkerType::Replacement, DocumentMarkerType::SpellCheckingExemption };
 }
 
-static inline OptionSet<DocumentMarkerType> markerTypesForReplacement()
+static inline OptionSet<DocumentMarkerType> LEGACY_NODELETE markerTypesForReplacement()
 {
     return { DocumentMarkerType::Replacement, DocumentMarkerType::SpellCheckingExemption };
 }

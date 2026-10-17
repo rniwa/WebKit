@@ -489,7 +489,7 @@ public:
 
     using MarkupAccumulator::append;
 
-    ContainerNode* parentNode(Node& node)
+    ContainerNode* LEGACY_NODELETE parentNode(Node& node)
     {
         if (m_useComposedTree) [[unlikely]]
             return parentInComposedTreeIgnoringUserAgentShadow(node);
@@ -1744,7 +1744,7 @@ static inline RefPtr<Text> LEGACY_NODELETE singleTextChild(ContainerNode& node)
     return node.hasOneChild() ? dynamicDowncast<Text>(node.firstChild()) : nullptr;
 }
 
-static inline bool hasMutationEventListeners(const Document& document)
+static inline bool LEGACY_NODELETE hasMutationEventListeners(const Document& document)
 {
     return document.hasAnyListenerOfType({ Document::ListenerType::DOMSubtreeModified, Document::ListenerType::DOMNodeInserted,
         Document::ListenerType::DOMNodeRemoved, Document::ListenerType::DOMNodeRemovedFromDocument, Document::ListenerType::DOMCharacterDataModified });

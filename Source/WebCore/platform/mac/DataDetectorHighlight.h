@@ -87,7 +87,7 @@ public:
     };
 
     Type type() const { return m_type; }
-    bool isRangeSupportingType() const;
+    bool LEGACY_NODELETE isRangeSupportingType() const;
 
     WEBCORE_EXPORT void fadeIn();
     WEBCORE_EXPORT void fadeOut();

@@ -39,7 +39,7 @@ class WEBCORE_EXPORT PlatformMediaSessionManager : public MediaSessionManagerInt
 {
     WTF_MAKE_TZONE_ALLOCATED(PlatformMediaSessionManager);
 public:
-    static RefPtr<PlatformMediaSessionManager> create(PageIdentifier);
+    static RefPtr<PlatformMediaSessionManager> LEGACY_NODELETE create(PageIdentifier);
 
     void forEachMatchingSession(NOESCAPE const Function<bool(const PlatformMediaSessionInterface&)>& predicate, NOESCAPE const Function<void(PlatformMediaSessionInterface&)>& matchingCallback) final;
 

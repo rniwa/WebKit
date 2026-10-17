@@ -133,7 +133,7 @@ public:
 
     bool operator==(const TextAutospace&) const = default;
 
-    bool shouldApplySpacing(TextSpacing::CharacterClass firstCharacterClass, TextSpacing::CharacterClass secondCharacterClass) const;
+    bool LEGACY_NODELETE shouldApplySpacing(TextSpacing::CharacterClass firstCharacterClass, TextSpacing::CharacterClass secondCharacterClass) const;
     bool shouldApplySpacing(char32_t firstCharacter, char32_t secondCharacter) const;
     static float LEGACY_NODELETE textAutospaceSize(const Font&);
 

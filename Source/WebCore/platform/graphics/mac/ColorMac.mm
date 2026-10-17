@@ -49,7 +49,7 @@ namespace WebCore {
 
 static bool useOldAquaFocusRingColor;
 
-Color oldAquaFocusRingColor()
+Color LEGACY_NODELETE oldAquaFocusRingColor()
 {
     return SRGBA<uint8_t> { 125, 173, 217 };
 }

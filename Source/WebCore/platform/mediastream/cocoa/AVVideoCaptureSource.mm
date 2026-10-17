@@ -286,7 +286,7 @@ CaptureSourceOrError AVVideoCaptureSource::create(const CaptureDevice& device, M
     return WTF::move(source);
 }
 
-static double cameraZoomScaleFactor(AVCaptureDeviceType deviceType)
+static double LEGACY_NODELETE cameraZoomScaleFactor(AVCaptureDeviceType deviceType)
 {
 #if PLATFORM(IOS_FAMILY)
     return (PAL::canLoad_AVFoundation_AVCaptureDeviceTypeBuiltInTripleCamera() && deviceType == AVCaptureDeviceTypeBuiltInTripleCamera)
@@ -1525,7 +1525,7 @@ bool AVVideoCaptureSource::interrupted() const
     return RealtimeMediaSource::interrupted();
 }
 
-static bool isFormatPowerEfficient(AVCaptureDeviceFormat* format)
+static bool LEGACY_NODELETE isFormatPowerEfficient(AVCaptureDeviceFormat* format)
 {
 #if PLATFORM(IOS_FAMILY)
     return format.isVideoBinned;

@@ -240,7 +240,7 @@ void DataDetectorHighlight::didFinishFadeOutAnimation()
     layer().removeFromParent();
 }
 
-bool areEquivalent(const DataDetectorHighlight* a, const DataDetectorHighlight* b)
+bool LEGACY_NODELETE areEquivalent(const DataDetectorHighlight* a, const DataDetectorHighlight* b)
 {
     if (a == b)
         return true;

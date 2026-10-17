@@ -40,11 +40,11 @@ class ThermalMitigationNotifier final : public RefCountedAndCanMakeWeakPtr<Therm
     WTF_MAKE_TZONE_ALLOCATED_EXPORT(ThermalMitigationNotifier, WEBCORE_EXPORT);
 public:
     using ThermalMitigationChangeCallback = Function<void(bool thermalMitigationEnabled)>;
-    WEBCORE_EXPORT static Ref<ThermalMitigationNotifier> create(ThermalMitigationChangeCallback&&);
+    WEBCORE_EXPORT static Ref<ThermalMitigationNotifier> LEGACY_NODELETE create(ThermalMitigationChangeCallback&&);
     WEBCORE_EXPORT ~ThermalMitigationNotifier();
 
-    WEBCORE_EXPORT bool thermalMitigationEnabled() const;
-    WEBCORE_EXPORT static bool isThermalMitigationEnabled();
+    WEBCORE_EXPORT bool LEGACY_NODELETE thermalMitigationEnabled() const;
+    WEBCORE_EXPORT static bool LEGACY_NODELETE isThermalMitigationEnabled();
 
 private:
     explicit ThermalMitigationNotifier(ThermalMitigationChangeCallback&&);

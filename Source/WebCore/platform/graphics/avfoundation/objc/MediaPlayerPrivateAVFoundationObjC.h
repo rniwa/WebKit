@@ -319,8 +319,8 @@ private:
     bool wirelessVideoPlaybackDisabled() const final;
     void setWirelessVideoPlaybackDisabled(bool) final;
     OptionSet<MediaPlaybackTargetType> supportedPlaybackTargetTypes() const final;
-    static OptionSet<MediaPlaybackTargetType> playbackTargetTypes();
-    void updateDisableExternalPlayback();
+    static OptionSet<MediaPlaybackTargetType> LEGACY_NODELETE playbackTargetTypes();
+    void LEGACY_NODELETE updateDisableExternalPlayback();
 #endif
 
 #if ENABLE(WIRELESS_PLAYBACK_TARGET)
@@ -404,7 +404,7 @@ private:
     RefPtr<WebCoreAVFResourceLoader> takeResourceLoader(AVAssetResourceLoadingRequest *);
 
     void updateLayerAttachment();
-    bool shouldAttachLayerToPlayer();
+    bool LEGACY_NODELETE shouldAttachLayerToPlayer();
 
 #if PLATFORM(MAC)
     void screenReservedChanged(bool) final;

@@ -152,7 +152,7 @@ private:
 #endif
 
     std::optional<double> LEGACY_NODELETE computeMinZoom() const;
-    std::optional<double> computeMaxZoom(AVCaptureDeviceFormat*) const;
+    std::optional<double> LEGACY_NODELETE computeMaxZoom(AVCaptureDeviceFormat*) const;
 
     void updateWhiteBalanceMode();
     void updateTorch();

@@ -147,7 +147,7 @@ public:
     bool isContainedBySecureField() const;
     bool isNativeTextControl() const final { return nativeTextControl(); }
     // The <textarea> or text <input> whose value this object exposes, or null.
-    HTMLTextFormControlElement* nativeTextControl() const;
+    HTMLTextFormControlElement* LEGACY_NODELETE nativeTextControl() const;
     virtual bool isSearchField() const { return false; }
     bool isAttachment() const override { return false; }
 #if ENABLE(ATTACHMENT_ELEMENT)
@@ -532,7 +532,7 @@ public:
     Path elementPath() const override { return Path(); }
     bool supportsPath() const override { return false; }
 
-    TextIteratorBehaviors textIteratorBehaviorForTextRange() const;
+    TextIteratorBehaviors LEGACY_NODELETE textIteratorBehaviorForTextRange() const;
     static TextIterator textIteratorIgnoringFullSizeKana(const SimpleRange&);
     CharacterRange selectedTextRange() const override { return { }; }
     int insertionPointLineNumber() const override { return -1; }

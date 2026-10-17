@@ -156,7 +156,7 @@ std::optional<Path> BorderPainter::pathForBorderArea(const LayoutRect& rect, con
     return borderShape.pathForBorderArea(deviceScaleFactor);
 }
 
-static LayoutRect calculateSideRect(const LayoutRect& outerBorderRect, const BorderEdges& edges, BoxSide side)
+static LayoutRect LEGACY_NODELETE calculateSideRect(const LayoutRect& outerBorderRect, const BorderEdges& edges, BoxSide side)
 {
     auto sideRect = outerBorderRect;
     float width = edges.at(side).widthForPainting();
@@ -614,7 +614,7 @@ static inline bool borderStylesRequireMitre(BoxSide side, BoxSide adjacentSide, 
     return borderStyleHasUnmatchedColorsAtCorner(style, side, adjacentSide);
 }
 
-static bool joinRequiresMitre(BoxSide side, BoxSide adjacentSide, const BorderEdges& edges, bool allowOverdraw)
+static bool LEGACY_NODELETE joinRequiresMitre(BoxSide side, BoxSide adjacentSide, const BorderEdges& edges, bool allowOverdraw)
 {
     auto& edge = edges.at(side);
     auto& adjacentEdge = edges.at(adjacentSide);

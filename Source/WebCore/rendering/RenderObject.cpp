@@ -1020,7 +1020,7 @@ void RenderObject::repaintUsingContainer(SingleThreadWeakPtr<const RenderLayerMo
     }
 }
 
-static inline bool fullRepaintIsScheduled(const RenderObject& renderer)
+static inline bool LEGACY_NODELETE fullRepaintIsScheduled(const RenderObject& renderer)
 {
     if (!renderer.view().usesCompositing() && !renderer.document().ownerElement())
         return false;
@@ -2558,7 +2558,7 @@ PointerEvents RenderObject::usedPointerEvents() const
     return style().usedPointerEvents();
 }
 
-static bool intervalsSufficientlyOverlap(int startA, int endA, int startB, int endB)
+static bool LEGACY_NODELETE intervalsSufficientlyOverlap(int startA, int endA, int startB, int endB)
 {
     if (endA <= startA || endB <= startB)
         return false;
@@ -2760,7 +2760,7 @@ static void makeBidiSelectionVisuallyContiguousIfNeeded(const SelectionEndpointD
 #endif
 }
 
-static void adjustTextDirectionForCoalescedGeometries(const SelectionEndpointDirections& directions, const SimpleRange& range, Vector<SelectionGeometry>& geometries)
+static void LEGACY_NODELETE adjustTextDirectionForCoalescedGeometries(const SelectionEndpointDirections& directions, const SimpleRange& range, Vector<SelectionGeometry>& geometries)
 {
     if (!usesVisuallyContiguousBidiTextSelection(range))
         return;
